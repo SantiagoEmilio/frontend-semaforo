@@ -1,0 +1,11 @@
+.dom {
+  width: 375px;
+  height: 100vh;
+  margin: auto;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
