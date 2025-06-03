@@ -1,11 +1,35 @@
-.dom {
-  width: 375px;
-  height: 100vh;
-  margin: auto;
-  border-radius: 1rem;
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  margin-top: 40px;
+}
 
+.semaforo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.luz {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #444;
+  transition: background-color 0.3s;
+  box-shadow: 0 0 10px #0003;
+}
+
+.luz.rojo.activo {
+  background-color: red;
+}
+
+.luz.amarillo.activo {
+  background-color: yellow;
+}
+
+.luz.verde.activo {
+  background-color: green;
 }
