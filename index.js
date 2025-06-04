@@ -1,6 +1,6 @@
-import { Roja } from "../componentes/rojo.js";
-import { Amarilla } from "../componentes/amarillo.js";
-import { Verde } from "../componentes/verde.js";
+import { Roja } from "./componentes/rojo.js";
+import { Amarilla } from "./componentes/amarillo.js";
+import { Verde } from "./componentes/verde.js";
 
 const FIREBASE_URL = "https://semaforooooo-default-rtdb.firebaseio.com/";
 let estadoActual = "rojo";
