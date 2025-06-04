@@ -3,90 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semáforo Inteligente - Firebase</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Semaforo</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="header">
-        <h1>🚦 Semáforo Inteligente</h1>
-        <p>Control en tiempo real con Raspberry Pi Pico W</p>
-    </div>
-
-    <div class="status" id="status">
-        <div class="status-item">
-            <span class="label">Estado:</span>
-            <span class="value" id="estado">Conectando...</span>
-        </div>
-        <div class="status-item">
-            <span class="label">Color Actual:</span>
-            <span class="value" id="color-actual">---</span>
-        </div>
-        <div class="status-item">
-            <span class="label">Última Actualización:</span>
-            <span class="value" id="ultima-actualizacion">---</span>
-        </div>
-    </div>
-
-    <div class="semaforo-container">
-        <div class="semaforo">
-            <div class="poste-superior"></div>
-           
-            <div class="luz rojo" id="luz-rojo">
-                <div class="brillo"></div>
-                <div class="reflejo"></div>
-            </div>
-           
-            <div class="luz amarillo" id="luz-amarillo">
-                <div class="brillo"></div>
-                <div class="reflejo"></div>
-            </div>
-           
-            <div class="luz verde" id="luz-verde">
-                <div class="brillo"></div>
-                <div class="reflejo"></div>
-            </div>
-           
-            <div class="base-semaforo"></div>
-        </div>
-    </div>
-
-    <div class="controls">
-        <button class="btn" id="btn-conectar">🔄 Reconectar</button>
-        <button class="btn" id="btn-historial">📊 Ver Historial</button>
-    </div>
-
-    <div class="historial" id="historial">
-        <h3>📈 Historial de Estados</h3>
-        <div class="historial-lista" id="historial-lista">
-            <!-- Aquí se cargarán los datos del historial -->
-        </div>
-    </div>
-
-    <div class="info-tecnica">
-        <h3>ℹ️ Información Técnica</h3>
-        <div class="info-grid">
-            <div class="info-card">
-                <h4>🔴 Rojo</h4>
-                <p>Duración: 3 segundos</p>
-                <p>Significado: Alto total</p>
-            </div>
-            <div class="info-card">
-                <h4>🟡 Amarillo</h4>
-                <p>Duración: 1 segundo</p>
-                <p>Significado: Precaución</p>
-            </div>
-            <div class="info-card">
-                <h4>🟢 Verde</h4>
-                <p>Duración: 3 segundos</p>
-                <p>Significado: Paso libre</p>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2025 - Semáforo IoT con Raspberry Pi Pico W y Firebase</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script type="module" src="/View/index.js"></script>
 </body>
 </html>

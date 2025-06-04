@@ -1,35 +1,83 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f4f4f4;
-  margin-top: 40px;
+.div-botonesControl {
+  width: 371px;
+  height: 70px;
+  border-radius: 1rem;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 0.2rem;
 }
 
-.semaforo {
+.controls button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btnVerde {
+  background-color: rgb(91, 206, 91);
+}
+
+.btnRojo {
+  background-color: #f00;
+}
+
+.btnAmarillo {
+  background-color: rgb(238, 226, 55);
+}
+
+.semaforo-Base {
+  margin: auto;
+  margin-top: 1rem;
+  width: 180px; /* <-- más ancho */
+  height: 370px; /* ligeramente más alto */
+  background-color: #2b2b2b;
+  border-radius: 25px;
+  padding: 25px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4); /* efecto sutil */
+  border: 2px solid #444;
 }
 
 .luz {
-  width: 80px;
-  height: 80px;
+  width: 85px; /* un poco más anchas */
+  height: 85px;
   border-radius: 50%;
-  background-color: #444;
-  transition: background-color 0.3s;
-  box-shadow: 0 0 10px #0003;
+  background-color: #555;
+  border: 3px solid #222;
 }
 
-.luz.rojo.activo {
-  background-color: red;
+.luz.rojo {
+  background-color: #f00;
 }
 
-.luz.amarillo.activo {
-  background-color: yellow;
+.luz.amarillo {
+  background-color: #ff0;
 }
 
-.luz.verde.activo {
-  background-color: green;
+.luz.verde {
+  background-color: #0f0;
+}
+
+.luz.activo {
+  box-shadow: 0 0 20px #f8f8f8, 0 0 40px currentColor;
+}
+
+/* Fondo */
+body {
+  background-color: rgb(130, 163, 115);
+  font-family: sans-serif;
 }
