@@ -2,11 +2,10 @@ import { Roja } from "./componentes/rojo.js";
 import { Amarilla } from "./componentes/amarillo.js";
 import { Verde } from "./componentes/verde.js";
 
-const FIREBASE_URL = "https://semaforooooo-default-rtdb.firebaseio.com/";
+const FIREBASE_URL = "https://semaforooooo-c6eae-default-rtdb.firebaseio.com/.json";
 let estadoActual = "rojo";
 
 
-//estos son los modulos de los colores Att santi
 
 function SemaforoGeneral() {
     const semaforoModulo = document.createElement("div");
@@ -43,7 +42,7 @@ function botonesEnGeneral() {
 
     const btnDetener = document.createElement("button");
     btnDetener.className = "btnDetener";
-    btnDetener.innerText = "Detene";
+    btnDetener.innerText = "Deten";
     divbotones.appendChild(btnDetener)
 
     const btnRojo = document.createElement("button");
