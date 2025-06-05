@@ -6,6 +6,8 @@ const FIREBASE_URL = "https://semaforooooo-c6eae-default-rtdb.firebaseio.com/.js
 let estadoActual = "rojo";
 let cicloActivo = true;  // Variable para saber si el ciclo está activo
 
+
+//modulos del semaforo
 function SemaforoModulo() {
     const semaforo = document.createElement("div");
     semaforo.className = "semaforo-Base";
@@ -14,6 +16,7 @@ function SemaforoModulo() {
     semaforo.appendChild(Verde());
     document.body.appendChild(semaforo);
 }
+
 
 
 function botonesEnGeneral() {
