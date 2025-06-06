@@ -2,12 +2,10 @@ import { Roja } from "./componentes/rojo.js";
 import { Amarilla } from "./componentes/amarillo.js";
 import { Verde } from "./componentes/verde.js";
 
-const FIREBASE_URL = "https://semaforooooo-c6eae-default-rtdb.firebaseio.com/.json";
+const FIREBASE_URL = "https://semaforooooo-c6eae-default-rtdb.firebaseio.com/semaforo.json";
 let estadoActual = "rojo";
-let cicloActivo = true;  // Variable para saber si el ciclo está activo
+let cicloActivo = true;
 
-
-//modulos del semaforo
 function SemaforoModulo() {
     const semaforo = document.createElement("div");
     semaforo.className = "semaforo-Base";
@@ -16,8 +14,6 @@ function SemaforoModulo() {
     semaforo.appendChild(Verde());
     document.body.appendChild(semaforo);
 }
-
-
 
 function botonesEnGeneral() {
     const divbotones = document.createElement("div");
@@ -50,24 +46,21 @@ function botonesEnGeneral() {
     document.body.appendChild(divbotones);
 }
 
-
 async function iniciaFirebase() {
     setInterval(async () => {
         try {
             const response = await fetch(FIREBASE_URL);
             const data = await response.json();
-            if (data?.color && data.color !== estadoActual) {
-                estadoActual = data.color;
+            if (data?.estado && data.estado !== estadoActual) {
+                estadoActual = data.estado;
                 actualizacionDelSemaforo(estadoActual);
 
                 if (estadoActual === "detener") {
-                    cicloActivo = false;  // Detenemos el ciclo automático
-                    console.log("Semáforo detenido");
+                    cicloActivo = false;
                 } else if (estadoActual === "ciclo") {
-                    cicloActivo = true;  // Reanudamos el ciclo automático
-                    console.log("Ciclo automático reanudado");
+                    cicloActivo = true;
                 } else {
-                    cicloActivo = false;  // Detenemos el ciclo si se recibe un color específico
+                    cicloActivo = false;
                 }
             }
         } catch (error) {
@@ -85,13 +78,12 @@ function actualizacionDelSemaforo(color) {
     });
 }
 
-
 async function cambiarEstado(color) {
     try {
         await fetch(FIREBASE_URL, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ color })
+            body: JSON.stringify({ estado: color })
         });
         console.log("Estado cambiado a:", color);
     } catch (error) {
@@ -99,18 +91,21 @@ async function cambiarEstado(color) {
     }
 }
 
+async function cicloAutomatico() {
+    if (!cicloActivo) return;
 
-function cicloAutomatico() {
-    if (!cicloActivo) return;  // Si el ciclo está detenido, no hacemos nada
+    const secuencia = [
+        ["rojo", 3000],
+        ["amarillo", 1000],
+        ["verde", 3000],
+        ["amarillo", 1000]
+    ];
 
-    const secuencia = [("rojo", 3), ("amarillo", 1), ("verde", 3), ("amarillo", 1)];
     for (const [color, duracion] of secuencia) {
-        if (!cicloActivo) return;  // Si el ciclo se detuvo mientras, salimos
-
-        console.log(`Encendiendo ${color} por ${duracion} segundos`);
-        cambiarEstado(color);  // Aquí cambia el estado en Firebase
+        if (!cicloActivo) break;
+        await cambiarEstado(color);
         actualizacionDelSemaforo(color);
-        setTimeout(() => {}, duracion * 1000);
+        await new Promise(resolve => setTimeout(resolve, duracion));
     }
 }
 
@@ -118,4 +113,6 @@ botonesEnGeneral();
 SemaforoModulo();
 actualizacionDelSemaforo(estadoActual);
 iniciaFirebase();
-setInterval(cicloAutomatico, 1000); 
+setInterval(() => {
+    if (cicloActivo) cicloAutomatico();
+}, 200);
