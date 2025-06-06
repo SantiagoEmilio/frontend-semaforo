@@ -2,6 +2,7 @@ import { Roja } from "./componentes/rojo.js";
 import { Amarilla } from "./componentes/amarillo.js";
 import { Verde } from "./componentes/verde.js";
 
+
 const FIREBASE_URL = "https://semaforooooo-c6eae-default-rtdb.firebaseio.com/semaforo.json";
 let estadoActual = "rojo";
 let cicloActivo = true;
