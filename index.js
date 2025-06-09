@@ -1,11 +1,16 @@
 import { Roja } from "./componentes/rojo.js";
 import { Amarilla } from "./componentes/amarillo.js";
 import { Verde } from "./componentes/verde.js";
-
+import { ventiladorLosDatos } from "./componentes/ventilador.js";
 
 const FIREBASE_URL = "https://semaforo-3da01-default-rtdb.firebaseio.com/.json";
 let estadoActual = "rojo";
 let cicloActivo = true;
+
+// Crear contenedor general
+const contenedorGeneral = document.createElement("div");
+contenedorGeneral.className = "contenedor-general";
+document.body.appendChild(contenedorGeneral);
 
 function SemaforoModulo() {
     const semaforo = document.createElement("div");
@@ -13,7 +18,7 @@ function SemaforoModulo() {
     semaforo.appendChild(Roja());
     semaforo.appendChild(Amarilla());
     semaforo.appendChild(Verde());
-    document.body.appendChild(semaforo);
+    contenedorGeneral.appendChild(semaforo); // Aquí lo metemos al contenedor
 }
 
 function botonesEnGeneral() {
@@ -47,29 +52,6 @@ function botonesEnGeneral() {
     document.body.appendChild(divbotones);
 }
 
-async function iniciaFirebase() {
-    setInterval(async () => {
-        try {
-            const response = await fetch(FIREBASE_URL);
-            const data = await response.json();
-            if (data?.estado && data.estado !== estadoActual) {
-                estadoActual = data.estado;
-                actualizacionDelSemaforo(estadoActual);
-
-                if (estadoActual === "detener") {
-                    cicloActivo = false;
-                } else if (estadoActual === "ciclo") {
-                    cicloActivo = true;
-                } else {
-                    cicloActivo = false;
-                }
-            }
-        } catch (error) {
-            console.error("Error leyendo Firebase:", error);
-        }
-    }, 1000);
-}
-
 function actualizacionDelSemaforo(color) {
     document.querySelectorAll('.luz').forEach(luz => {
         luz.classList.remove('activo');
@@ -92,6 +74,23 @@ async function cambiarEstado(color) {
     }
 }
 
+async function iniciaFirebase() {
+    setInterval(async () => {
+        try {
+            const response = await fetch(FIREBASE_URL);
+            const data = await response.json();
+            if (data?.estado && data.estado !== estadoActual) {
+                estadoActual = data.estado;
+                actualizacionDelSemaforo(estadoActual);
+
+                cicloActivo = data.estado === "ciclo";
+            }
+        } catch (error) {
+            console.error("Error leyendo Firebase:", error);
+        }
+    }, 1000);
+}
+
 async function cicloAutomatico() {
     if (!cicloActivo) return;
 
@@ -110,8 +109,10 @@ async function cicloAutomatico() {
     }
 }
 
+// Inicia el sistema
 botonesEnGeneral();
 SemaforoModulo();
+ventiladorLosDatos(contenedorGeneral); // <-- pasa el contenedor como argumento
 actualizacionDelSemaforo(estadoActual);
 iniciaFirebase();
 setInterval(() => {

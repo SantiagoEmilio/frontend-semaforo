@@ -39,8 +39,8 @@ button {
 .semaforo-Base {
   margin: auto;
   margin-top: 1rem;
-  width: 180px; /* <-- más ancho */
-  height: 370px; /* ligeramente más alto */
+  width: 180px;
+  height: 370px;
   background-color: #2b2b2b;
   border-radius: 25px;
   padding: 25px;
@@ -48,12 +48,12 @@ button {
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4); /* efecto sutil */
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   border: 2px solid #444;
 }
 
 .luz {
-  width: 85px; /* un poco más anchas */
+  width: 85px;
   height: 85px;
   border-radius: 50%;
   background-color: #555;
@@ -76,8 +76,176 @@ button {
   box-shadow: 0 0 20px #f8f8f8, 0 0 40px currentColor;
 }
 
-/* Fondo */
 body {
   background-color: rgb(130, 163, 115);
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor para alinear los datos a la izquierda */
+.izquierda {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.datos {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 280px;
+  height: 200px;
+  border: 2px solid #ddd;
+  background: linear-gradient(135deg, #f4f4f4, #ffffff);
+}
+
+.datos p {
+  font-size: 18px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.datos span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+#ventilador {
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+  transition: transform 1s ease-in-out;
+}
+
+.girar {
+  animation: girar 2s infinite linear;
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Media Queries para responsive */
+
+/* Tablets y dispositivos medianos */
+@media screen and (max-width: 900px) {
+  .div-botonesControl {
+    width: 90%;
+    height: 60px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.1rem;
+  }
+
+  button, .controls button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .semaforo-Base {
+    width: 140px;
+    height: 300px;
+    padding: 15px;
+  }
+
+  .luz {
+    width: 65px;
+    height: 65px;
+  }
+
+  .datos {
+    width: 220px;
+    height: 160px;
+    padding: 20px;
+    left: 10px;
+  }
+
+  .datos p {
+    font-size: 16px;
+  }
+
+  .datos span {
+    font-size: 20px;
+  }
+
+  #ventilador {
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+  }
+}
+
+/* Móviles */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .div-botonesControl {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    gap: 0.3rem;
+  }
+
+  button, .controls button {
+    font-size: 14px;
+    padding: 10px 10px;
+    margin: 5px 0;
+  }
+
+  .semaforo-Base {
+    width: 120px;
+    height: 250px;
+    padding: 10px;
+  }
+
+  .luz {
+    width: 55px;
+    height: 55px;
+  }
+
+  .izquierda {
+    flex-direction: column;
+    position: static;
+    height: auto;
+  }
+
+  .datos {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+    transform: none;
+    border-radius: 15px;
+  }
+
+  .datos p {
+    font-size: 16px;
+  }
+
+  .datos span {
+    font-size: 20px;
+  }
+
+  #ventilador {
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+  }
 }
