@@ -110,6 +110,10 @@ body {
   height: 200px;
   border: 2px solid #ddd;
   background: linear-gradient(135deg, #f4f4f4, #ffffff);
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
 }
 
 .datos p {
@@ -124,6 +128,7 @@ body {
   color: #4CAF50;
 }
 
+/* Ventilador */
 #ventilador {
   width: 60px;
   height: 60px;
@@ -131,13 +136,19 @@ body {
   transition: transform 1s ease-in-out;
 }
 
-.girar {
-  animation: girar 2s infinite linear;
+/* Giro lento */
+.girar-lento {
+  animation: girar 3s linear infinite;
+}
+
+/* Giro rápido */
+.girar-rapido {
+  animation: girar 1s linear infinite;
 }
 
 @keyframes girar {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Media Queries para responsive */

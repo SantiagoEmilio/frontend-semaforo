@@ -6,6 +6,7 @@ import { ventiladorLosDatos } from "./componentes/ventilador.js";
 const FIREBASE_URL = "https://semaforo-3da01-default-rtdb.firebaseio.com/.json";
 let estadoActual = "rojo";
 let cicloActivo = true;
+let cicloEnCurso = false;
 
 // Crear contenedor general
 const contenedorGeneral = document.createElement("div");
@@ -18,7 +19,7 @@ function SemaforoModulo() {
     semaforo.appendChild(Roja());
     semaforo.appendChild(Amarilla());
     semaforo.appendChild(Verde());
-    contenedorGeneral.appendChild(semaforo); // Aquí lo metemos al contenedor
+    contenedorGeneral.appendChild(semaforo);
 }
 
 function botonesEnGeneral() {
@@ -82,7 +83,6 @@ async function iniciaFirebase() {
             if (data?.estado && data.estado !== estadoActual) {
                 estadoActual = data.estado;
                 actualizacionDelSemaforo(estadoActual);
-
                 cicloActivo = data.estado === "ciclo";
             }
         } catch (error) {
@@ -112,9 +112,15 @@ async function cicloAutomatico() {
 // Inicia el sistema
 botonesEnGeneral();
 SemaforoModulo();
-ventiladorLosDatos(contenedorGeneral); // <-- pasa el contenedor como argumento
+ventiladorLosDatos(contenedorGeneral);
 actualizacionDelSemaforo(estadoActual);
 iniciaFirebase();
+
 setInterval(() => {
-    if (cicloActivo) cicloAutomatico();
-}, 200);
+    if (cicloActivo && !cicloEnCurso) {
+        cicloEnCurso = true;
+        cicloAutomatico().then(() => {
+            cicloEnCurso = false;
+        });
+    }
+}, 500);
