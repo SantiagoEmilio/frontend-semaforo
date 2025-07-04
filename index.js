@@ -65,7 +65,7 @@ function actualizacionDelSemaforo(color) {
 async function cambiarEstado(color) {
     try {
         await fetch(FIREBASE_URL, {
-            method: 'PUT',
+            method: 'PATCH', // ✅ antes decía PUT
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ estado: color })
         });
@@ -74,6 +74,7 @@ async function cambiarEstado(color) {
         console.error("Error al actualizar Firebase:", error);
     }
 }
+
 
 async function iniciaFirebase() {
     setInterval(async () => {
